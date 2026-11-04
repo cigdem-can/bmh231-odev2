@@ -1,0 +1,72 @@
+ :root {
+     --ana-renk: #8b1e2d;
+     --acik-renk: #f5f5f5;
+     --yazi-renk: #222;
+     --bosluk: 16px;
+     --kose: 8px;
+ }
+
+ *,
+ *::before,
+ *::after {
+     box-sizing: border-box;
+ }
+
+ body {
+     margin: 0;
+     font-family: Arial, sans-serif;
+     color: var(--yazi-renk);
+     background: var(--acik-renk);
+ }
+
+ .ust-bant {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: var(--bosluk);
+     background: var(--ana-renk);
+     color: white;
+ }
+
+ .logo {
+     font-weight: bold;
+     font-size: 1.3rem;
+ }
+
+ nav a {
+     color: white;
+     margin-left: var(--bosluk);
+     text-decoration: none;
+ }
+
+ main {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: var(--bosluk);
+ }
+
+ .arac-cubugu {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: var(--bosluk);
+ }
+
+ .filtreler {
+     display: flex;
+     gap: 8px;
+ }
+
+ .filtre {
+     padding: 8px 14px;
+     border: 2px solid var(--ana-renk);
+     background: white;
+     color: var(--ana-renk);
+     border-radius: var(--kose);
+     cursor: pointer;
+ }
+
+ .filtre.secili {
+     background: var(--ana-renk);
+     color: white;
+ }
