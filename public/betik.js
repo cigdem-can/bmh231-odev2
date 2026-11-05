@@ -50,4 +50,35 @@ function kartlariCiz(liste) {
     }
 }
 
-kartlariCiz(etkinlikler);
+const filtreDugmeleri = document.querySelectorAll(".filtre");
+const aramaKutusu = document.getElementById("arama");
+let secilenTur = "tumu";
+
+function listeyiGuncelle() {
+    const aranan = aramaKutusu.value.trim().toLocaleLowerCase("tr");
+    const sonuc = etkinlikler.filter(function (etkinlik) {
+        const turUyuyor = secilenTur === "tumu" || etkinlik.tur === secilenTur;
+        const aramaUyuyor = etkinlik.baslik.toLocaleLowerCase("tr").includes(aranan);
+        return turUyuyor && aramaUyuyor;
+    });
+
+    kartlariCiz(sonuc);
+    if (sonuc.length === 0) {
+        durum.textContent = "Aramanıza uygun etkinlik yok.";
+    }
+}
+
+for (const dugme of filtreDugmeleri) {
+    dugme.addEventListener("click", function () {
+        for (const d of filtreDugmeleri) {
+            d.classList.remove("secili");
+        }
+        dugme.classList.add("secili");
+        secilenTur = dugme.dataset.tur;
+        listeyiGuncelle();
+    });
+}
+
+aramaKutusu.addEventListener("input", listeyiGuncelle);
+
+listeyiGuncelle();
