@@ -142,6 +142,11 @@
      color: #1b5e20;
  }
 
+ #form-ileti {
+     white-space: pre-line;
+     font-weight: bold;
+ }
+
  footer {
      margin-top: 32px;
      padding: var(--bosluk);

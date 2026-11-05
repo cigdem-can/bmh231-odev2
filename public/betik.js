@@ -82,3 +82,43 @@ for (const dugme of filtreDugmeleri) {
 aramaKutusu.addEventListener("input", listeyiGuncelle);
 
 listeyiGuncelle();
+const form = document.getElementById("oneri-formu");
+const formIleti = document.getElementById("form-ileti");
+
+form.addEventListener("submit", function (olay) {
+    olay.preventDefault();
+
+    const ad = form.ad.value.trim();
+    const tarih = form.tarih.value;
+    const eposta = form.eposta.value.trim();
+    const hatalar = [];
+
+    if (ad.length < 5) {
+        hatalar.push("Etkinlik adı en az 5 karakter olmalı.");
+    }
+
+    if (tarih === "") {
+        hatalar.push("Tarih boş bırakılamaz.");
+    } else {
+        const secilenGun = new Date(tarih + "T00:00");
+        const bugun = new Date();
+        bugun.setHours(0, 0, 0, 0);
+        if (secilenGun < bugun) {
+            hatalar.push("Geçmiş bir tarih seçilemez.");
+        }
+    }
+
+    const epostaKalibi = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!epostaKalibi.test(eposta)) {
+        hatalar.push("Geçerli bir e-posta adresi yazın.");
+    }
+
+    if (hatalar.length > 0) {
+        formIleti.className = "hata";
+        formIleti.textContent = hatalar.join("\n");
+    } else {
+        formIleti.className = "basari";
+        formIleti.textContent = "Teşekkürler! \"" + ad + "\" önerin alındı.";
+        form.reset();
+    }
+});
