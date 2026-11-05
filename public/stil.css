@@ -70,3 +70,100 @@
      background: var(--ana-renk);
      color: white;
  }
+
+ .kartlar {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+     gap: var(--bosluk);
+     margin-top: var(--bosluk);
+ }
+
+ .kart {
+     background: white;
+     border-radius: var(--kose);
+     padding: var(--bosluk);
+     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+ }
+
+ .kart h2 {
+     margin: 0 0 8px;
+     font-size: 1.2rem;
+     color: var(--ana-renk);
+ }
+
+ .kart p {
+     margin: 4px 0;
+ }
+
+ .etiket {
+     display: inline-block;
+     padding: 2px 10px;
+     border: 1px solid var(--ana-renk);
+     border-radius: 12px;
+     font-size: 0.85rem;
+     color: var(--ana-renk);
+ }
+
+ #oneri {
+     margin-top: 32px;
+     padding: var(--bosluk);
+     background: white;
+     border-radius: var(--kose);
+ }
+
+ #oneri-formu {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+     max-width: 400px;
+ }
+
+ input {
+     padding: 8px;
+     border: 1px solid #999;
+     border-radius: 4px;
+     font-size: 1rem;
+ }
+
+ #oneri-formu button {
+     padding: 10px;
+     background: var(--ana-renk);
+     color: white;
+     border: none;
+     border-radius: var(--kose);
+     cursor: pointer;
+ }
+
+ .hata {
+     color: #b00020;
+ }
+
+ .basari {
+     color: #1b5e20;
+ }
+
+ footer {
+     margin-top: 32px;
+     padding: var(--bosluk);
+     text-align: center;
+     background: var(--ana-renk);
+     color: white;
+ }
+
+ @media (max-width: 700px) {
+
+     .ust-bant,
+     .arac-cubugu {
+         flex-direction: column;
+         align-items: flex-start;
+     }
+
+     .filtreler {
+         flex-wrap: wrap;
+     }
+
+     nav a {
+         margin-left: 0;
+         margin-right: var(--bosluk);
+     }
+ }
