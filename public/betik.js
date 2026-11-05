@@ -4,17 +4,7 @@ const turAdlari = {
     topluluk: "Topluluk"
 };
 
-let etkinlikler = [
-    { id: 1, baslik: "Web Programlama Atölyesi", tur: "atolye", tarih: "2026-11-12", yer: "Mühendislik Fakültesi Bilgisayar Lab 1", kontenjan: 30 },
-    { id: 2, baslik: "Git ve GitHub Atölyesi", tur: "atolye", tarih: "2026-11-19", yer: "Mühendislik Fakültesi Bilgisayar Lab 2", kontenjan: 25 },
-    { id: 3, baslik: "Yapay Zekâ ve Gelecek Söyleşisi", tur: "soylesi", tarih: "2026-11-26", yer: "Mühendislik Fakültesi Konferans Salonu", kontenjan: 200 },
-    { id: 4, baslik: "Siber Güvenlik Topluluğu Tanışma Toplantısı", tur: "topluluk", tarih: "2026-11-17", yer: "Merkez Kütüphane Seminer Salonu", kontenjan: 120 },
-    { id: 5, baslik: "CTF'ye Giriş Atölyesi", tur: "atolye", tarih: "2026-12-03", yer: "Mühendislik Fakültesi Bilgisayar Lab 1", kontenjan: 40 },
-    { id: 6, baslik: "Kariyer Söyleşisi: Bilişim Sektörü", tur: "soylesi", tarih: "2026-12-08", yer: "Rektörlük Konferans Salonu", kontenjan: 250 },
-    { id: 7, baslik: "Yazılım Topluluğu Kodlama Gecesi", tur: "topluluk", tarih: "2026-12-11", yer: "Merkez Kütüphane Grup Çalışma Odası", kontenjan: 50 },
-    { id: 8, baslik: "Ağ Güvenliği Söyleşisi", tur: "soylesi", tarih: "2026-12-17", yer: "Mühendislik Fakültesi Konferans Salonu", kontenjan: 150 }
-];
-
+let etkinlikler = [];
 const kartlarAlani = document.getElementById("kartlar");
 const durum = document.getElementById("durum");
 
@@ -81,7 +71,25 @@ for (const dugme of filtreDugmeleri) {
 
 aramaKutusu.addEventListener("input", listeyiGuncelle);
 
-listeyiGuncelle();
+async function etkinlikleriYukle() {
+    kartlarAlani.textContent = "";
+    durum.className = "";
+    durum.textContent = "Yükleniyor...";
+    try {
+        const yanit = await fetch("/api/etkinlikler");
+        if (!yanit.ok) {
+            throw new Error("Sunucu " + yanit.status + " döndürdü");
+        }
+        etkinlikler = await yanit.json();
+        listeyiGuncelle();
+    } catch (hata) {
+        durum.className = "hata";
+        durum.textContent = "Etkinlikler yüklenemedi. Lütfen daha sonra tekrar deneyin.";
+        console.error(hata);
+    }
+}
+
+etkinlikleriYukle();
 const form = document.getElementById("oneri-formu");
 const formIleti = document.getElementById("form-ileti");
 
